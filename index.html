@@ -20,18 +20,19 @@
 
 <body>
 
-  <canvas id="myCanvas" width="480" height="320"></canvas>
+  <canvas id="myCanvas" width="560" height="480"></canvas>
 
   <script>
     // JavaScript code goes here
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
+    var rng = Math.floor(Math.random()*5);
 
     //ball properties
     var x = canvas.width / 2;
     var y = canvas.height - 30;
-    var dx = 2;
-    var dy = -2;
+    var dx = Math.floor(Math.random()*5);
+    var dy = Math.floor(Math.random()*5);
     var ballRadius = 10;
 
     //paddle properties
@@ -42,8 +43,8 @@
     var leftPressed = false;
 
     //brick properties
-    var brickRowCount = 5;
-    var brickColumnCount = 3;
+    var brickRowCount = 6;
+    var brickColumnCount = 7;
     var brickWidth = 75;
     var brickHeight = 20;
     var brickPadding = 10;
@@ -101,6 +102,16 @@
               dy = -dy;
               b.status = 0;
               score++;
+              if (score % 3 == 0){
+                if (dx > 0)
+                  dx += 0.5;
+                else
+                  dx -= 0.5;
+                if (dy > 0)
+                  dy += 0.5;
+                else
+                  dy -= 0.5;
+              }
               if (score == brickRowCount * brickColumnCount) {
                 alert("YOU WIN, CONGRATS!");
                 document.location.reload();
